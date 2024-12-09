@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react'
+import { useRouter } from 'next/navigation'
 import { Table, Tag, Skeleton } from 'antd'
 import type { ColumnsType } from 'antd/es/table'
 import { StockData } from '../types'
@@ -10,10 +11,8 @@ interface StockTableProps {
   isLoading: boolean
 }
 
-// Helper function to format numbers with commas
 const formatNumber = (num: string) => num.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 
-// Define Ant Design Table columns
 const columns: ColumnsType<StockData> = [
   {
     title: 'Symbol',
@@ -106,7 +105,8 @@ const columns: ColumnsType<StockData> = [
 ]
 
 const StockTable: React.FC<StockTableProps> = ({ stocks, isLoading }) => {
-  // Generate Placeholder Skeleton Data
+  const router = useRouter()
+
   const skeletonData: StockData[] = isLoading
     ? Array.from({ length: 5 }).map((_, index) => ({
         symbol: `loading-${index}`,
@@ -115,7 +115,7 @@ const StockTable: React.FC<StockTableProps> = ({ stocks, isLoading }) => {
         netchange: '0.00',
         pctchange: '0%',
         marketCap: '0',
-        loading: true, // Custom flag for rendering skeletons
+        loading: true,
       }))
     : stocks
 
@@ -125,6 +125,9 @@ const StockTable: React.FC<StockTableProps> = ({ stocks, isLoading }) => {
       dataSource={skeletonData}
       rowKey={record => record.symbol}
       pagination={{ pageSize: 10 }}
+      onRow={record => ({
+        onClick: () => router.push(`/market/stock/${record.symbol}`),
+      })}
       bordered
     />
   )

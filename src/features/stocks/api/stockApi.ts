@@ -6,7 +6,15 @@ export const fetchStockTickers = async (
   type = 'STOCKS'
 ): Promise<StockApiResponse> => {
   const response = await axiosInstance.get<StockApiResponse>(
-    `/markets/tickers?page=${page}&type=${type}`
+    `/v2/markets/tickers?page=${page}&type=${type}`
   )
   return response.data
+}
+
+export const fetchStockDetail = async (id: string) => {
+  const response = await axiosInstance.get(
+    `/v1/markets/stock/modules?ticker=${id}&module=statistics`
+  )
+
+  return response.data.body
 }
