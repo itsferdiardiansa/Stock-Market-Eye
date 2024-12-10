@@ -11,6 +11,7 @@ import {
   BoxCubeIcon,
   TaskIcon,
   UserIcon,
+  EnvelopeIcon,
 } from '../icons/index'
 
 type NavItem = {
@@ -35,6 +36,7 @@ const navItems: NavItem[] = [
 
 // Stock Detail Submenu (Appears Only in `/market/stock/[id]`)
 const stockDetailSubItems = [
+  { name: 'Details', type: 'detail', icon: <EnvelopeIcon /> },
   { name: 'Profile', type: 'profile', icon: <UserIcon /> },
   { name: 'Financial Data', type: 'financial-data', icon: <DollarLineIcon /> },
   { name: 'SEC Filings', type: 'sec-filings', icon: <DocsIcon /> },

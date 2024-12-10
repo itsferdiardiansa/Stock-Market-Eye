@@ -18,3 +18,10 @@ export const fetchStockDetail = async (id: string) => {
 
   return response.data.body
 }
+
+export const fetchStockProfile = async (id: string) => {
+  const response = await axiosInstance.get(
+    `/v1/markets/stock/modules?ticker=${id}&module=asset-profile`
+  )
+  return response.data.body
+}
