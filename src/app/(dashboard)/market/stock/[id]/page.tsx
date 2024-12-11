@@ -5,6 +5,7 @@ import { useParams, useSearchParams } from 'next/navigation'
 import StockOverview from './_components/StockOverview'
 import StockProfile from './_components/StockProfile'
 import PageBreadcrumb from '@/components/common/PageBreadCrumb'
+import StockFinancial from './_components/StockFinancialData'
 
 const StockDetailPage = () => {
   const { id } = useParams()
@@ -18,6 +19,9 @@ const StockDetailPage = () => {
       <div className="space-y-8">
         {stockType === 'detail' && <StockOverview stockId={id as string} />}
         {stockType === 'profile' && <StockProfile stockId={id as string} />}
+        {stockType === 'financial-data' && (
+          <StockFinancial stockId={id as string} />
+        )}
       </div>
     </div>
   )
