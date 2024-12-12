@@ -3,6 +3,7 @@ import {
   fetchStockDetail,
   fetchStockFinancialData,
   fetchStockProfile,
+  fetchStockSECFilings,
 } from '../api/stockApi'
 
 export const useStockDetail = (id: string) => {
@@ -27,6 +28,15 @@ export const useStockFinancial = (id: string) => {
   return useQuery({
     queryKey: ['stockFinancial', id],
     queryFn: () => fetchStockFinancialData(id),
+    staleTime: 10000 * 60 * 5,
+    refetchOnWindowFocus: false,
+  })
+}
+
+export const useStockSECFilings = (id: string) => {
+  return useQuery({
+    queryKey: ['stockSECFilings', id],
+    queryFn: () => fetchStockSECFilings(id),
     staleTime: 10000 * 60 * 5,
     refetchOnWindowFocus: false,
   })

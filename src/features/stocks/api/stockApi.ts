@@ -32,3 +32,10 @@ export const fetchStockFinancialData = async (id: string) => {
   )
   return response.data.body
 }
+
+export const fetchStockSECFilings = async (id: string) => {
+  const response = await axiosInstance.get(
+    `/v1/markets/stock/modules?ticker=${id}&module=sec-filings`
+  )
+  return response.data.body.filings
+}
