@@ -7,6 +7,7 @@ import StockProfile from './_components/StockProfile'
 import PageBreadcrumb from '@/components/common/PageBreadCrumb'
 import StockFinancial from './_components/StockFinancialData'
 import StockSECFilings from './_components/StockSECFilling'
+import StockEarnings from './_components/StockEarnings'
 
 const StockDetailPage = () => {
   const { id } = useParams()
@@ -20,6 +21,7 @@ const StockDetailPage = () => {
       <div className="space-y-8">
         {stockType === 'detail' && <StockOverview stockId={id as string} />}
         {stockType === 'profile' && <StockProfile stockId={id as string} />}
+        {stockType === 'earnings' && <StockEarnings stockId={id as string} />}
         {stockType === 'sec-filings' && (
           <StockSECFilings stockId={id as string} />
         )}
