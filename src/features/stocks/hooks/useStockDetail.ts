@@ -5,6 +5,7 @@ import {
   fetchStockProfile,
   fetchStockSECFilings,
   fetchStockEarnings,
+  fetchStockIndexTrend,
 } from '../api/stockApi'
 
 export const useStockDetail = (id: string) => {
@@ -48,6 +49,15 @@ export const useStockEarnings = (id: string) => {
     queryKey: ['stockEarnings', id],
     queryFn: () => fetchStockEarnings(id),
     staleTime: 10000 * 60 * 5,
+    refetchOnWindowFocus: false,
+  })
+}
+
+export const useStockIndexTrend = (id: string) => {
+  return useQuery({
+    queryKey: ['stockIndexTrend', id],
+    queryFn: () => fetchStockIndexTrend(id),
+    staleTime: 1000 * 60 * 5,
     refetchOnWindowFocus: false,
   })
 }

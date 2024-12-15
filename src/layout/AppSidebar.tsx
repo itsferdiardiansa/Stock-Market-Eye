@@ -73,7 +73,11 @@ const AppSidebar: React.FC = () => {
     >
       <div className="py-8 flex justify-center">
         <Link href="/">
-          <h1 className="text-2xl">Market Stocks Eye</h1>
+          {isExpanded || isHovered || isMobileOpen ? (
+            <h1 className="text-2xl">Market Stocks Eye</h1>
+          ) : (
+            <h1 className="text-2xl">M</h1>
+          )}
         </Link>
       </div>
 
@@ -124,8 +128,10 @@ const AppSidebar: React.FC = () => {
                               : 'menu-dropdown-item-inactive'
                           } flex items-center gap-2`}
                         >
-                          {item.icon} {/* Added icon here */}
-                          {item.name}
+                          {item.icon}
+
+                          {(isExpanded || isHovered || isMobileOpen) &&
+                            item.name}
                         </Link>
                       </li>
                     )

@@ -46,3 +46,10 @@ export const fetchStockEarnings = async (id: string) => {
   )
   return response.data.body.earnings
 }
+
+export const fetchStockIndexTrend = async (id: string) => {
+  const response = await axiosInstance.get(
+    `/v1/markets/stock/modules?ticker=${id}&module=index-trend`
+  )
+  return response.data.body
+}

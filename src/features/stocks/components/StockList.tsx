@@ -124,7 +124,8 @@ const StockTable: React.FC<StockTableProps> = ({ stocks, isLoading }) => {
       columns={columns}
       dataSource={skeletonData}
       rowKey={record => record.symbol}
-      pagination={{ pageSize: 10 }}
+      pagination={{ pageSize: 15 }}
+      style={{ cursor: 'pointer' }}
       onRow={record => ({
         onClick: () =>
           router.push(`/market/stock/${record.symbol}?stock-type=detail`),

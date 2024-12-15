@@ -8,6 +8,7 @@ import PageBreadcrumb from '@/components/common/PageBreadCrumb'
 import StockFinancial from './_components/StockFinancialData'
 import StockSECFilings from './_components/StockSECFilling'
 import StockEarnings from './_components/StockEarnings'
+import StockIndexTrend from './_components/StockIndexTrend'
 
 const StockDetailPage = () => {
   const { id } = useParams()
@@ -15,13 +16,16 @@ const StockDetailPage = () => {
   const stockType = searchParams.get('stock-type') || 'profile'
 
   return (
-    <div className="container mx-auto px-6 py-8">
+    <div className="w-full 6 py-8">
       <PageBreadcrumb pageTitle={`${id} - Stock Detail`} />
 
       <div className="space-y-8">
         {stockType === 'detail' && <StockOverview stockId={id as string} />}
         {stockType === 'profile' && <StockProfile stockId={id as string} />}
         {stockType === 'earnings' && <StockEarnings stockId={id as string} />}
+        {stockType === 'index-trend' && (
+          <StockIndexTrend stockId={id as string} />
+        )}
         {stockType === 'sec-filings' && (
           <StockSECFilings stockId={id as string} />
         )}
