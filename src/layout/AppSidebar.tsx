@@ -12,7 +12,8 @@ import {
   TaskIcon,
   UserIcon,
   EnvelopeIcon,
-} from '../icons/index'
+  GridIcon,
+} from '@/icons/index'
 
 type NavItem = {
   name: string
@@ -27,6 +28,11 @@ type NavItem = {
 
 // Sidebar menu items
 const navItems: NavItem[] = [
+  {
+    icon: <GridIcon />,
+    name: 'Dashboard',
+    path: '/',
+  },
   {
     icon: <PieChartIcon />,
     name: 'Stock Listings',
