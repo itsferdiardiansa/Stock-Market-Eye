@@ -3,7 +3,7 @@
 import React from 'react'
 import { useStockSECFilings } from '@/features/stocks/hooks/useStockDetail'
 import { Alert, Spin, Table, Tag, Tooltip } from 'antd'
-import { FaFileAlt, FaExternalLinkAlt, FaCalendarAlt } from 'react-icons/fa'
+import { FaExternalLinkAlt, FaCalendarAlt } from 'react-icons/fa'
 import ComponentCard from '@/components/common/ComponentCard'
 
 interface StockSECFilingsProps {

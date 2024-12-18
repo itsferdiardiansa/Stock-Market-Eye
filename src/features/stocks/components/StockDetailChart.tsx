@@ -2,11 +2,10 @@
 
 import React from 'react'
 import dynamic from 'next/dynamic'
-import { Card, Skeleton } from 'antd'
+import { Skeleton } from 'antd'
 import { ApexOptions } from 'apexcharts'
 import { StockData } from '@/features/stocks/types'
 
-// Load ApexCharts dynamically (fixes Next.js SSR issues)
 const Chart = dynamic(() => import('react-apexcharts'), { ssr: false })
 
 interface StockChartProps {

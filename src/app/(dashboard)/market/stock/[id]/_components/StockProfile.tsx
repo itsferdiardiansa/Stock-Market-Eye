@@ -22,6 +22,15 @@ interface StockProfileProps {
   stockId: string
 }
 
+interface Officer {
+  title: string
+  name: string
+  age: string
+  totalPay: {
+    fmt: string
+  }
+}
+
 const StockProfile: React.FC<StockProfileProps> = ({ stockId }) => {
   const { data, isLoading, isError, error } = useStockProfile(stockId)
 
@@ -127,7 +136,7 @@ const StockProfile: React.FC<StockProfileProps> = ({ stockId }) => {
       <div className="col-span-1 md:col-span-2">
         <ComponentCard title="👔 Key Executives" className="shadow-lg">
           <Descriptions bordered column={3}>
-            {data?.companyOfficers?.map((officer: any, index: any) => (
+            {data?.companyOfficers?.map((officer: Officer, index: string) => (
               <React.Fragment key={index}>
                 <Descriptions.Item
                   label={
