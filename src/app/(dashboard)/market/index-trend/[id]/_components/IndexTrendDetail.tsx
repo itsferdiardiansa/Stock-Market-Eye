@@ -12,11 +12,13 @@ import {
 import ComponentCard from '@/components/common/ComponentCard'
 import IndexTrendChart from '@/features/stocks/components/StockIndexTrendChart'
 
-interface StockIndexTrendProps {
+interface StockIndexTrendDetailProps {
   stockId: string
 }
 
-const StockIndexTrend: React.FC<StockIndexTrendProps> = ({ stockId }) => {
+const StockIndexTrendDetail: React.FC<StockIndexTrendDetailProps> = ({
+  stockId,
+}) => {
   const { data, isLoading, isError, error } = useStockIndexTrend(stockId)
 
   if (isLoading)
@@ -107,4 +109,4 @@ const StockIndexTrend: React.FC<StockIndexTrendProps> = ({ stockId }) => {
   )
 }
 
-export default StockIndexTrend
+export default StockIndexTrendDetail

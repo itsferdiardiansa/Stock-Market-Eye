@@ -2,7 +2,7 @@
 
 import React, { useCallback } from 'react'
 import Link from 'next/link'
-import { usePathname, useSearchParams } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 import { useSidebar } from '../context/SidebarContext'
 import {
   PieChartIcon,
@@ -45,7 +45,7 @@ const stockDetailSubItems = [
   { name: 'Details', type: 'detail', icon: <EnvelopeIcon /> },
   { name: 'Profile', type: 'profile', icon: <UserIcon /> },
   { name: 'Financial Data', type: 'financial-data', icon: <DollarLineIcon /> },
-  { name: 'SEC Filings', type: 'sec-filings', icon: <DocsIcon /> },
+  { name: 'SEC Filings', type: 'sec-fillings', icon: <DocsIcon /> },
   { name: 'Earnings', type: 'earnings', icon: <TaskIcon /> },
   { name: 'Index Trend', type: 'index-trend', icon: <BoxCubeIcon /> },
 ]
@@ -53,11 +53,12 @@ const stockDetailSubItems = [
 const AppSidebar: React.FC = () => {
   const { isExpanded, isMobileOpen, isHovered, setIsHovered } = useSidebar()
   const pathname = usePathname()
-  const searchParams = useSearchParams()
 
   // Extract stock ID from path `/market/stock/[id]`
-  const stockIdMatch = pathname.match(/^\/market\/stock\/([^/]+)$/)
-  const stockId = stockIdMatch ? stockIdMatch[1] : null
+  const stockIdMatch = pathname.match(
+    /^\/market\/(stock|detail|earnings|financial-data|index-trend|profile|sec-fillings)\/([^/]+)$/
+  )
+  const stockId = stockIdMatch ? stockIdMatch[2] : null
 
   // Check if path is active
   const isActive = useCallback((path: string) => pathname === path, [pathname])
@@ -120,19 +121,15 @@ const AppSidebar: React.FC = () => {
                 </h2>
                 <ul className="flex flex-col gap-2">
                   {stockDetailSubItems.map(item => {
-                    const queryParam = `?stock-type=${item.type}`
-                    const isSelected =
-                      searchParams.get('stock-type') === item.type
+                    // const queryParam = `?stock-type=${item.type}`
+                    // const isSelected =
+                    //   searchParams.get('stock-type') === item.type
 
                     return (
                       <li key={item.name}>
                         <Link
-                          href={`/market/stock/${stockId}${queryParam}`}
-                          className={`menu-dropdown-item ${
-                            isSelected
-                              ? 'menu-dropdown-item-active'
-                              : 'menu-dropdown-item-inactive'
-                          } flex items-center gap-2`}
+                          href={`/market/${item.type}/${stockId}`}
+                          className={`menu-dropdown-item flex items-center gap-2`}
                         >
                           {item.icon}
 

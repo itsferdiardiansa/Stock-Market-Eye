@@ -6,7 +6,7 @@ import { Alert, Spin, Table, Tag, Tooltip } from 'antd'
 import { FaExternalLinkAlt, FaCalendarAlt } from 'react-icons/fa'
 import ComponentCard from '@/components/common/ComponentCard'
 
-interface StockSECFilingsProps {
+interface StockSECFilingDetailProps {
   stockId: string
 }
 
@@ -15,7 +15,9 @@ const truncateText = (text: string, maxLength: number) => {
   return text.length > maxLength ? `${text.substring(0, maxLength)}...` : text
 }
 
-const StockSECFilings: React.FC<StockSECFilingsProps> = ({ stockId }) => {
+const StockSECFilingDetail: React.FC<StockSECFilingDetailProps> = ({
+  stockId,
+}) => {
   const { data, isLoading, isError, error } = useStockSECFilings(stockId)
 
   if (isLoading)
@@ -101,4 +103,4 @@ const StockSECFilings: React.FC<StockSECFilingsProps> = ({ stockId }) => {
   )
 }
 
-export default StockSECFilings
+export default StockSECFilingDetail

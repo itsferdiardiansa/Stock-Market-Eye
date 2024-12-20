@@ -7,7 +7,7 @@ import StockChart from '@/features/stocks/components/StockDetailChart'
 import { useStockDetail } from '@/features/stocks/hooks/useStockDetail'
 import { AiOutlineStock, AiOutlineRise, AiOutlineFall } from 'react-icons/ai'
 
-const StockOverview = ({ stockId }: { stockId: string }) => {
+const StockDetail = ({ stockId }: { stockId: string }) => {
   const { data, isLoading, isError, error } = useStockDetail(stockId as string)
 
   if (isLoading)
@@ -95,4 +95,4 @@ const StockOverview = ({ stockId }: { stockId: string }) => {
   )
 }
 
-export default StockOverview
+export default StockDetail

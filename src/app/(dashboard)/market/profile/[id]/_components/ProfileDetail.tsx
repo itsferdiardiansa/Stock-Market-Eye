@@ -18,7 +18,7 @@ import {
   AlertIcon,
 } from '@/icons/index'
 
-interface StockProfileProps {
+interface StockProfileDetailProps {
   stockId: string
 }
 
@@ -31,7 +31,7 @@ interface Officer {
   }
 }
 
-const StockProfile: React.FC<StockProfileProps> = ({ stockId }) => {
+const StockProfileDetail: React.FC<StockProfileDetailProps> = ({ stockId }) => {
   const { data, isLoading, isError, error } = useStockProfile(stockId)
 
   if (isLoading)
@@ -203,4 +203,4 @@ const StockProfile: React.FC<StockProfileProps> = ({ stockId }) => {
   )
 }
 
-export default StockProfile
+export default StockProfileDetail

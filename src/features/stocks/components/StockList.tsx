@@ -18,7 +18,7 @@ const StockTable: React.FC<StockTableProps> = ({ stocks, isLoading }) => {
   const router = useRouter()
 
   const handleRowClick = (symbol: string) => {
-    router.push(`/market/stock/${symbol}?stock-type=detail`)
+    router.push(`/market/detail/${symbol}`)
   }
 
   const columns: ColumnsType<StockData> = [

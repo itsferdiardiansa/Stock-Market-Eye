@@ -18,7 +18,7 @@ import {
 } from 'react-icons/fa'
 import ComponentCard from '@/components/common/ComponentCard'
 
-interface StockFinancialProps {
+interface StockFinancialDetailProps {
   stockId: string
 }
 
@@ -30,7 +30,9 @@ const getColorClass = (value: number | undefined) => {
     : 'text-red-600 font-semibold'
 }
 
-const StockFinancial: React.FC<StockFinancialProps> = ({ stockId }) => {
+const StockFinancialDetail: React.FC<StockFinancialDetailProps> = ({
+  stockId,
+}) => {
   const { data, isLoading, isError, error } = useStockFinancial(stockId)
 
   if (isLoading)
@@ -238,4 +240,4 @@ const StockFinancial: React.FC<StockFinancialProps> = ({ stockId }) => {
   )
 }
 
-export default StockFinancial
+export default StockFinancialDetail

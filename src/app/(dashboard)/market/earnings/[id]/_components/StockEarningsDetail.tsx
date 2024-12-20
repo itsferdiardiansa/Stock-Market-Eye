@@ -12,11 +12,11 @@ import {
 import ComponentCard from '@/components/common/ComponentCard'
 import EarningsChart from '@/features/stocks/components/StockEarningChart'
 
-interface StockEarningsProps {
+interface StockEarningsDetailProps {
   stockId: string
 }
 
-const StockEarnings: React.FC<StockEarningsProps> = ({ stockId }) => {
+const StockEarnings: React.FC<StockEarningsDetailProps> = ({ stockId }) => {
   const { data, isLoading, isError, error } = useStockEarnings(stockId)
 
   if (isLoading)
