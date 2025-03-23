@@ -1,0 +1,12 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:is(.dark *));
+
+@import './base/reset.css';
+@import './base/fonts.css';
+@import './variables.css';
+@import './components/menu.css';
+@import './utilities/scrollbar.css';
+@import './third-party/apexcharts.css';
+@import './third-party/fullcalendar.css';
+@import './third-party/swiper.css';

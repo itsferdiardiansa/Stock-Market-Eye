@@ -6,19 +6,18 @@ import { Table, Tag, Skeleton, Button } from 'antd'
 import type { ColumnsType } from 'antd/es/table'
 import { StockData } from '../types'
 import { FaEye } from 'react-icons/fa'
+import { formatNumber } from '@/utils'
 
 interface StockTableProps {
   stocks: StockData[]
   isLoading: boolean
 }
 
-const formatNumber = (num: string) => num.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-
-const StockTable: React.FC<StockTableProps> = ({ stocks, isLoading }) => {
+const StockTable = ({ stocks, isLoading }: StockTableProps) => {
   const router = useRouter()
 
   const handleRowClick = (symbol: string) => {
-    router.push(`/market/detail/${symbol}`)
+    router.push(`/stock/statistics/${symbol}`)
   }
 
   const columns: ColumnsType<StockData> = [

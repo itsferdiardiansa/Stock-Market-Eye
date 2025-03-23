@@ -1,0 +1,39 @@
+@reference "../../../../styles/globals.css";
+
+.container {
+  @apply flex flex-col gap-4;
+
+  .section {
+    @apply block;
+
+    .title {
+      @apply text-lg font-semibold text-gray-900;
+    }
+
+    .items {
+      @apply mt-3;
+
+      .item {
+        @apply flex items-center justify-between text-gray-600 border-b border-dashed border-gray-300 py-3;
+
+        &:last-child {
+          @apply border-none;
+        }
+
+        &-left {
+          @apply flex items-center gap-2;
+
+          .icon {
+            @apply text-gray-400;
+          }
+        }
+
+        &-right {
+          .value {
+            @apply font-bold;
+          }
+        }
+      }
+    }
+  }
+}

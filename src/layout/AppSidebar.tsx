@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useCallback } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useSidebar } from '../context/SidebarContext'
@@ -14,6 +14,7 @@ import {
   EnvelopeIcon,
   GridIcon,
 } from '@/icons/index'
+import { cn } from '@/utils'
 
 type NavItem = {
   name: string
@@ -36,7 +37,7 @@ const navItems: NavItem[] = [
   {
     icon: <PieChartIcon />,
     name: 'Stock Listings',
-    path: '/stock-listings',
+    path: '/stock',
   },
 ]
 
@@ -52,9 +53,14 @@ const stockDetailSubItems = [
 
 const AppSidebar: React.FC = () => {
   const { isExpanded, isMobileOpen, isHovered, setIsHovered } = useSidebar()
+  const [lastSegment, setLastSegment] = useState<string>('')
   const pathname = usePathname()
 
-  // Extract stock ID from path `/market/stock/[id]`
+  useEffect(() => {
+    const segments = pathname.split('/').filter(Boolean)
+    setLastSegment(segments[segments.length - 2])
+  }, [pathname])
+
   const stockIdMatch = pathname.match(
     /^\/market\/(stock|detail|earnings|financial-data|index-trend|profile|sec-fillings)\/([^/]+)$/
   )
@@ -63,18 +69,36 @@ const AppSidebar: React.FC = () => {
   // Check if path is active
   const isActive = useCallback((path: string) => pathname === path, [pathname])
 
+  const getSidebarCls = () => {
+    return cn(
+      'fixed top-0 px-5 left-0 bg-white dark:bg-gray-900 text-gray-900 lg:translate-x-0',
+      'h-screen transition-all duration-300 ease-in-out z-50 border-r border-gray-200',
+      {
+        'w-[290px]': isExpanded || isHovered || isMobileOpen,
+        'w-[90px]': !isExpanded && !isHovered && !isMobileOpen,
+        'translate-x-0 lg:translate-x-0': isMobileOpen,
+        '-translate-x-full lg:translate-x-0': !isMobileOpen,
+      }
+    )
+  }
+
+  const getDropdownItemCls = (isSelected: boolean) => {
+    return cn('menu-dropdown-item flex items-center gap-2', {
+      'menu-dropdown-item-active': isSelected,
+      'menu-dropdown-item-inactive': !isSelected,
+    })
+  }
+
+  const getDropdownMenuItemCls = (isActive: boolean) => {
+    return cn('menu-item group', {
+      'menu-item-active': isActive,
+      'menu-item-inactive': !isActive,
+    })
+  }
+
   return (
     <aside
-      className={`fixed top-0 px-5 left-0 bg-white dark:bg-gray-900 text-gray-900 h-screen transition-all duration-300 ease-in-out z-50 border-r border-gray-200 
-        ${
-          isExpanded || isMobileOpen
-            ? 'w-[290px]'
-            : isHovered
-            ? 'w-[290px]'
-            : 'w-[90px]'
-        }
-        ${isMobileOpen ? 'translate-x-0' : '-translate-x-full'}
-        lg:translate-x-0`}
+      className={getSidebarCls()}
       onMouseEnter={() => !isExpanded && setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -99,11 +123,7 @@ const AppSidebar: React.FC = () => {
                   <li key={nav.name}>
                     <Link
                       href={nav.path!}
-                      className={`menu-item group ${
-                        isActive(nav.path!)
-                          ? 'menu-item-active'
-                          : 'menu-item-inactive'
-                      }`}
+                      className={getDropdownMenuItemCls(isActive(nav.path!))}
                     >
                       <span>{nav.icon}</span>
                       {isExpanded && <span>{nav.name}</span>}
@@ -121,15 +141,12 @@ const AppSidebar: React.FC = () => {
                 </h2>
                 <ul className="flex flex-col gap-2">
                   {stockDetailSubItems.map(item => {
-                    // const queryParam = `?stock-type=${item.type}`
-                    // const isSelected =
-                    //   searchParams.get('stock-type') === item.type
-
+                    const isSelected = lastSegment === item.type
                     return (
                       <li key={item.name}>
                         <Link
                           href={`/market/${item.type}/${stockId}`}
-                          className={`menu-dropdown-item flex items-center gap-2`}
+                          className={getDropdownItemCls(isSelected)}
                         >
                           {item.icon}
 

@@ -1,11 +1,23 @@
+export type * as SECFillingsType from './secFilingsType'
+export type * as EarningsType from './earningsType'
+export type * as ProfileType from './profileType'
+export type * as FinancialDataType from './financialDataType'
+export type * as IndexTrendType from './indexTrendType'
+export type * as StatisticsType from './statisticsType'
+
+/**
+ * Index Module Type
+ *
+ **/
+
 // Root response type
-export interface StockApiResponse {
+export type StockApiResponse = {
   meta: MetaData
   body: StockData[]
 }
 
 // Metadata structure
-export interface MetaData {
+export type MetaData = {
   version: string
   status: number
   copywrite: string
@@ -14,7 +26,7 @@ export interface MetaData {
 }
 
 // Headers inside metadata
-export interface MetaHeaders {
+export type MetaHeaders = {
   symbol: string
   name: string
   lastsale: string
@@ -24,7 +36,7 @@ export interface MetaHeaders {
 }
 
 // Stock data structure
-export interface StockData {
+export type StockData = {
   loading?: boolean
   symbol: string
   name: string

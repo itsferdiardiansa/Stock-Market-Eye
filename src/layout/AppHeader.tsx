@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
-import { ThemeToggleButton } from '@/components/common/ThemeToggleButton'
+// import { ThemeToggleButton } from '@/components/common/ThemeToggleButton'
 import UserDropdown from '@/components/header/UserDropdown'
 import { useSidebar } from '@/context/SidebarContext'
 
@@ -148,7 +148,7 @@ const AppHeader: React.FC = () => {
         >
           <div className="flex items-center gap-2 2xsm:gap-3">
             {/* <!-- Dark Mode Toggler --> */}
-            <ThemeToggleButton />
+            {/* <ThemeToggleButton /> */}
             {/* <!-- Dark Mode Toggler --> */}
           </div>
           {/* <!-- User Area --> */}
