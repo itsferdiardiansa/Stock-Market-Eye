@@ -1,0 +1,59 @@
+@reference "../../../../styles/globals.css";
+
+.container {
+  @apply flex flex-col gap-4;
+
+  .row {
+    @apply flex items-center justify-between text-gray-600 border-dashed border-gray-300 pb-2;
+  }
+
+  .label {
+    @apply flex items-center gap-2 text-gray-900 font-semibold;
+  }
+
+  .value {
+    @apply font-bold;
+  }
+
+  .grid {
+    @apply grid grid-cols-3 gap-3 text-gray-600;
+  }
+
+  .no-border {
+    @apply border-none;
+  }
+
+  .card {
+    @apply flex flex-col items-center bg-gray-100 p-2 rounded-lg;
+
+    &-label {
+      @apply text-sm;
+    }
+
+    &-value {
+      @apply font-bold;
+
+      &-red {
+        @apply text-red-500;
+      }
+
+      &-green {
+        @apply text-green-500;
+      }
+    }
+  }
+
+  .icon {
+    &-green {
+      @apply text-green-500;
+    }
+
+    &-yellow {
+      @apply text-yellow-500;
+    }
+
+    &-gray {
+      @apply text-gray-500;
+    }
+  }
+}

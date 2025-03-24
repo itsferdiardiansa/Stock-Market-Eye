@@ -9,6 +9,10 @@ import { useStock } from '@/features/stock/hooks/useStockDetail'
 import { QueryKeys } from '@/constants/stockQuery'
 import { StatisticsData } from '@/features/stock/types/statisticsType'
 
+type StockStatisticsProps = {
+  stockId: string
+}
+
 const leftSections: FinancialHighlightSections[] = [
   {
     title: 'Stock Valuation',
@@ -56,9 +60,17 @@ const rightSections: FinancialHighlightSections[] = [
   },
 ]
 
-type StockStatisticsProps = {
-  stockId: string
-}
+export const StockStatisticsLoader = () => (
+  <div className="flex flex-col lg:flex-row flex-wrap items-stretch gap-8">
+    <div className="flex-1 flex flex-col gap-8">
+      <FinancialHighlightsLoader />
+    </div>
+
+    <div className="flex-1 flex flex-col gap-8">
+      <FinancialHighlightsLoader />
+    </div>
+  </div>
+)
 
 const StockStatistics = ({ stockId }: StockStatisticsProps) => {
   const { data } = useStock<StatisticsData>({
@@ -85,17 +97,5 @@ const StockStatistics = ({ stockId }: StockStatisticsProps) => {
     </div>
   )
 }
-
-export const StockStatisticsLoader = () => (
-  <div className="flex flex-col lg:flex-row flex-wrap items-stretch gap-8">
-    <div className="flex-1 flex flex-col gap-8">
-      <FinancialHighlightsLoader />
-    </div>
-
-    <div className="flex-1 flex flex-col gap-8">
-      <FinancialHighlightsLoader />
-    </div>
-  </div>
-)
 
 export default StockStatistics

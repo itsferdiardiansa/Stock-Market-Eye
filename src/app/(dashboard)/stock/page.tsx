@@ -71,7 +71,6 @@ export default function StockListingsPage() {
       </div>
 
       <div className="space-y-6">
-        <pre>{JSON.stringify(data, null, 2)}</pre>
         <ComponentCard
           title={`Stock Market Overview - ${dayjs().format('MMMM D, YYYY')}`}
         >

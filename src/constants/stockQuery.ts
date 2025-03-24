@@ -9,4 +9,5 @@ export const QueryKeys = {
   STOCK_SEC_FILINGS: 'stockSECFilings',
   STOCK_EARNINGS: 'stockEarnings',
   STOCK_INDEX_TREND: 'stockIndexTrend',
+  STOCK_CALENDAR_EVENTS: 'stockCalendarEvents',
 } as const

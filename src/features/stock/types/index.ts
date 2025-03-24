@@ -16,6 +16,12 @@ export type StockModule =
   | 'sec-filings'
   | 'earnings'
   | 'index-trend'
+  | 'calendar-events'
+
+export type FormattedNumber = {
+  raw: number
+  fmt: string
+}
 
 export type StockData = {
   loading?: boolean

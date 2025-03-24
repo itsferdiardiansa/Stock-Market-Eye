@@ -60,7 +60,7 @@ const FinancialHighlights = ({ sections, data }: FinancilHighlightsProps) => {
                   {iconsMap[item.key] || (
                     <FaBalanceScale className={styles['icon']} />
                   )}
-                  {item.label}:
+                  {item.label}
                 </div>
                 <div className={styles['item-right']}>
                   <span className={styles['value']}>
