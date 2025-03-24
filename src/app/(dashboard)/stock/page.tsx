@@ -6,8 +6,8 @@ import PageBreadcrumb from '@/components/common/PageBreadCrumb'
 import { Alert } from 'antd'
 import dayjs from 'dayjs'
 
-import { useStockTickers } from '@/features/stocks/hooks/useStockTickers'
-import StockList from '@/features/stocks/components/StockList'
+import { useStockTickers } from '@/features/stock/hooks/useStockTickers'
+import StockList from '@/features/stock/components/StockList'
 import { FaInfoCircle, FaMousePointer } from 'react-icons/fa'
 
 export default function StockListingsPage() {
@@ -71,6 +71,7 @@ export default function StockListingsPage() {
       </div>
 
       <div className="space-y-6">
+        <pre>{JSON.stringify(data, null, 2)}</pre>
         <ComponentCard
           title={`Stock Market Overview - ${dayjs().format('MMMM D, YYYY')}`}
         >

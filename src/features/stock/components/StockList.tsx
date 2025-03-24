@@ -2,22 +2,21 @@
 
 import React from 'react'
 import { useRouter } from 'next/navigation'
-import { Table, Tag, Skeleton, Button } from 'antd'
+import { Table, Tag, Skeleton } from 'antd'
 import type { ColumnsType } from 'antd/es/table'
 import { StockData } from '../types'
-import { FaEye } from 'react-icons/fa'
 import { formatNumber } from '@/utils'
 
-interface StockTableProps {
+interface StockListProps {
   stocks: StockData[]
   isLoading: boolean
 }
 
-const StockTable = ({ stocks, isLoading }: StockTableProps) => {
+const StockList = ({ stocks, isLoading }: StockListProps) => {
   const router = useRouter()
 
   const handleRowClick = (symbol: string) => {
-    router.push(`/stock/statistics/${symbol}`)
+    router.push(`/stock/${symbol}`)
   }
 
   const columns: ColumnsType<StockData> = [
@@ -109,25 +108,6 @@ const StockTable = ({ stocks, isLoading }: StockTableProps) => {
           : parseInt(a.marketCap.replace(/,/g, ''), 10) -
             parseInt(b.marketCap.replace(/,/g, ''), 10),
     },
-    {
-      title: 'Details',
-      key: 'details',
-      render: (_, record) =>
-        record.loading ? (
-          <Skeleton.Button active size="small" />
-        ) : (
-          <Button
-            type="link"
-            icon={<FaEye />}
-            onClick={e => {
-              e.stopPropagation()
-              handleRowClick(record.symbol)
-            }}
-          >
-            View Details
-          </Button>
-        ),
-    },
   ]
 
   const skeletonData: StockData[] = isLoading
@@ -157,4 +137,4 @@ const StockTable = ({ stocks, isLoading }: StockTableProps) => {
   )
 }
 
-export default StockTable
+export default StockList

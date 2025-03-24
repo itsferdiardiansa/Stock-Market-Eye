@@ -1,9 +1,13 @@
 'use client'
 
-import { StatisticsData } from '@/features/stocks/types/statisticsType'
-import FinancialHighlights, {
+import {
+  FinancialHighlights,
+  FinancialHighlightsLoader,
   type FinancialHighlightSections,
-} from '@/features/stocks/components/financial-highlights'
+} from '@/features/stock/components/financial-highlights'
+import { useStock } from '@/features/stock/hooks/useStockDetail'
+import { QueryKeys } from '@/constants/stockQuery'
+import { StatisticsData } from '@/features/stock/types/statisticsType'
 
 const leftSections: FinancialHighlightSections[] = [
   {
@@ -53,21 +57,45 @@ const rightSections: FinancialHighlightSections[] = [
 ]
 
 type StockStatisticsProps = {
-  data: StatisticsData['defaultKeyStatistics'] | undefined
+  stockId: string
 }
 
-const StockStatistics: React.FC<StockStatisticsProps> = ({ data }) => {
+const StockStatistics = ({ stockId }: StockStatisticsProps) => {
+  const { data } = useStock<StatisticsData>({
+    id: stockId,
+    module: 'statistics',
+    queryKey: QueryKeys['STOCK_STATISTICS'],
+  })
+
   return (
     <div className="flex flex-col lg:flex-row flex-wrap items-stretch gap-8">
       <div className="flex-1 flex flex-col gap-8">
-        <FinancialHighlights sections={leftSections} data={data} />
+        <FinancialHighlights
+          sections={leftSections}
+          data={data.defaultKeyStatistics}
+        />
       </div>
 
       <div className="flex-1 flex flex-col gap-8">
-        <FinancialHighlights sections={rightSections} data={data} />
+        <FinancialHighlights
+          sections={rightSections}
+          data={data.defaultKeyStatistics}
+        />
       </div>
     </div>
   )
 }
+
+export const StockStatisticsLoader = () => (
+  <div className="flex flex-col lg:flex-row flex-wrap items-stretch gap-8">
+    <div className="flex-1 flex flex-col gap-8">
+      <FinancialHighlightsLoader />
+    </div>
+
+    <div className="flex-1 flex flex-col gap-8">
+      <FinancialHighlightsLoader />
+    </div>
+  </div>
+)
 
 export default StockStatistics

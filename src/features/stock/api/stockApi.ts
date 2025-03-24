@@ -1,22 +1,12 @@
 import axiosInstance from '@/config/axiosInstance'
-import { StockApiResponse } from '../types'
+import { StockModule } from '../types'
 import { buildApiUrl } from '@/utils'
 
-type StockModule =
-  | 'statistics'
-  | 'asset-profile'
-  | 'financial-data'
-  | 'sec-filings'
-  | 'earnings'
-  | 'index-trend'
-
-export const fetchStockTickers = async (
-  page = 1,
-  type = 'STOCKS'
-): Promise<StockApiResponse> => {
+export const fetchStockTickers = async (page = 1, type = 'STOCKS') => {
   const url = buildApiUrl('v2', 'markets/tickers', { page, type })
-  const response = await axiosInstance.get<StockApiResponse>(url)
+  const response = await axiosInstance.get(url)
 
+  console.log('RES: ', response)
   return response.data
 }
 

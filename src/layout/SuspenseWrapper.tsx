@@ -1,36 +1,35 @@
-import { Alert, Spin } from 'antd'
-import { PropsWithChildren } from 'react'
+'use client'
+
+import { PropsWithChildren, Suspense } from 'react'
+import { QueryErrorResetBoundary } from '@tanstack/react-query'
+import { ErrorBoundary, FallbackProps } from 'react-error-boundary'
 
 type SuspenseWrapperProps = {
-  isLoading: boolean
-  isError: boolean
-  error: Error | null
-} & PropsWithChildren
-
-const SuspenseWrapper = ({
-  isLoading,
-  isError,
-  error,
-  children,
-}: SuspenseWrapperProps) => {
-  if (isLoading)
-    return (
-      <div className="flex items-center justify-center h-screen">
-        <Spin size="large" />
-      </div>
-    )
-
-  if (isError)
-    return (
-      <Alert
-        message="Error loading stock data"
-        description={(error as Error).message}
-        type="error"
-        showIcon
-        className="mt-4"
-      />
-    )
-
-  return <>{children}</>
+  fallbackLoader: React.ReactNode
+  fallbackError?: (props: FallbackProps) => React.ReactNode
 }
-export default SuspenseWrapper
+
+const fallbackErrorRender = ({ resetErrorBoundary }: FallbackProps) => (
+  <div>
+    There was an error!
+    <button onClick={() => resetErrorBoundary()}>Try again</button>
+  </div>
+)
+
+const SuspanseWrapper = ({
+  children,
+  fallbackLoader,
+  fallbackError = fallbackErrorRender,
+}: SuspenseWrapperProps & PropsWithChildren) => {
+  return (
+    <QueryErrorResetBoundary>
+      {({ reset }) => (
+        <ErrorBoundary onReset={reset} fallbackRender={fallbackError}>
+          <Suspense fallback={fallbackLoader}>{children}</Suspense>
+        </ErrorBoundary>
+      )}
+    </QueryErrorResetBoundary>
+  )
+}
+
+export default SuspanseWrapper

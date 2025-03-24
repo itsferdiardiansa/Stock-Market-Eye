@@ -16,6 +16,10 @@
       .item {
         @apply flex items-center justify-between text-gray-600 border-b border-dashed border-gray-300 py-3;
 
+        &.no-border {
+          @apply border-none;
+        }
+
         &:last-child {
           @apply border-none;
         }

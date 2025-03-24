@@ -11,7 +11,7 @@ import {
 import {
   FormattedNumber,
   StatisticsData,
-} from '@/features/stocks/types/statisticsType'
+} from '@/features/stock/types/statisticsType'
 import styles from './FinancialHighlights.module.scss'
 
 type DefaultKey = keyof StatisticsData['defaultKeyStatistics']
@@ -64,7 +64,7 @@ const FinancialHighlights = ({ sections, data }: FinancilHighlightsProps) => {
                 </div>
                 <div className={styles['item-right']}>
                   <span className={styles['value']}>
-                    {(data?.[item.key] as FormattedNumber).fmt ?? 'N/A'}
+                    {(data?.[item.key] as FormattedNumber)?.fmt ?? 'N/A'}
                   </span>
                 </div>
               </div>
