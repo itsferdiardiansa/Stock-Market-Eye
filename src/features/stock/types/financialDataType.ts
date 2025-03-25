@@ -1,11 +1,6 @@
-export type FormattedNumber = {
-  raw: number
-  fmt: string
-  longFmt?: string
-}
+import { FormattedNumber } from '.'
 
-// Type untuk data finansial
-export type FinancialData = {
+export type Financial = {
   maxAge: number
   currentPrice: FormattedNumber
   targetHighPrice: FormattedNumber
@@ -38,6 +33,6 @@ export type FinancialData = {
   financialCurrency: string
 }
 
-export type ApiResponse = {
-  financialData: FinancialData
+export type FinancialData = {
+  financialData: Financial
 }

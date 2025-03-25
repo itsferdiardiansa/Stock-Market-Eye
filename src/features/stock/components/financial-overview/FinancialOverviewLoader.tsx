@@ -1,10 +1,10 @@
 'use client'
 
 import { Skeleton } from 'antd'
-import styles from './FinancialHighlights.module.scss'
+import styles from './FinancialOverview.module.scss'
 import { cn } from '@/utils'
 
-const FinancialHighlightLoader = () => {
+const FinancialOverviewLoader = () => {
   return (
     <div className={styles['container']}>
       {[...Array(2)].map((_, index) => (
@@ -16,7 +16,7 @@ const FinancialHighlightLoader = () => {
             active
           />
 
-          <div className={cn(styles['items'], styles['items-loader'])}>
+          <div className={styles['items']}>
             {[...Array(4)].map((_, itemIndex) => (
               <div
                 key={itemIndex}
@@ -42,4 +42,4 @@ const FinancialHighlightLoader = () => {
   )
 }
 
-export default FinancialHighlightLoader
+export default FinancialOverviewLoader

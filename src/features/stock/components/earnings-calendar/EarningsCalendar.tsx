@@ -15,10 +15,21 @@ type EarningsCalendarProps = {
 }
 
 const EarningsCalendar = ({ data }: EarningsCalendarProps) => {
+  const earnings = [
+    'earningsLow',
+    'earningsAverage',
+    'earningsHigh',
+  ] as EarningKeys[]
+  const revenues = [
+    'revenueLow',
+    'revenueAverage',
+    'revenueHigh',
+  ] as RevenueKeys[]
+
   return (
     <div className={styles['container']}>
       {/* Earnings Date */}
-      {data['earnings']?.['earningsDate'] && (
+      {data.earnings?.earningsDate && (
         <div className={styles['row']}>
           <span className={styles['label']}>
             <FaChartLine className={styles['icon-green']} /> Earnings Date
@@ -31,11 +42,9 @@ const EarningsCalendar = ({ data }: EarningsCalendarProps) => {
       )}
 
       {/* Earnings Estimate */}
-      {data['earnings'] && (
+      {data.earnings && (
         <div className={styles['grid']}>
-          {(
-            ['earningsLow', 'earningsAverage', 'earningsHigh'] as EarningKeys[]
-          ).map((key, idx) => (
+          {earnings.map((key, idx) => (
             <div key={idx} className={styles['card']}>
               <span className={styles['card-label']}>
                 {key.replace('earnings', '')}
@@ -55,11 +64,9 @@ const EarningsCalendar = ({ data }: EarningsCalendarProps) => {
       )}
 
       {/* Revenue Estimate */}
-      {data['earnings'] && (
+      {data.earnings && (
         <div className={styles['grid']}>
-          {(
-            ['revenueLow', 'revenueAverage', 'revenueHigh'] as RevenueKeys[]
-          ).map((key, idx) => (
+          {revenues.map((key, idx) => (
             <div key={idx} className={styles['card']}>
               <span className={styles['card-label']}>
                 {key.replace('revenue', '')}
@@ -79,7 +86,7 @@ const EarningsCalendar = ({ data }: EarningsCalendarProps) => {
       )}
 
       {/* Dividend Dates */}
-      {data['exDividendDate'] && (
+      {data.exDividendDate && (
         <div className={styles['row']}>
           <span className={styles['label']}>
             <FaMoneyBillWave className={styles['icon-yellow']} /> Ex-Dividend

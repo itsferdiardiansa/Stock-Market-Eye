@@ -60,17 +60,7 @@ const rightSections: FinancialHighlightSections[] = [
   },
 ]
 
-export const StockStatisticsLoader = () => (
-  <div className="flex flex-col lg:flex-row flex-wrap items-stretch gap-8">
-    <div className="flex-1 flex flex-col gap-8">
-      <FinancialHighlightsLoader />
-    </div>
-
-    <div className="flex-1 flex flex-col gap-8">
-      <FinancialHighlightsLoader />
-    </div>
-  </div>
-)
+export const StockStatisticsLoader = () => <FinancialHighlightsLoader />
 
 const StockStatistics = ({ stockId }: StockStatisticsProps) => {
   const { data } = useStock<StatisticsData>({
